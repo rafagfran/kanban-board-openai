@@ -13,17 +13,17 @@
   }
 
   .header__container {
-
     display: flex;
+    flex-direction: column;
+    gap: 2px;
     align-items: center;
     justify-content: center;
-
+    font-size: $text-sm;
     @include container;
   }
 
   .header__date {
     display: none;
-    font-size: $text-sm;
 
     @include respond-to("md") {
       display: block;
@@ -41,5 +41,9 @@
       height: $spacing-5;
       cursor: pointer;
     }
+  }
+
+  .header__explain {
+    color: #c4c71e;
   }
 }

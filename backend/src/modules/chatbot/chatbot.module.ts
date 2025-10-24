@@ -1,5 +1,6 @@
-import { DatabaseModule } from '@/database/database.module';
+
 import { Module } from '@nestjs/common';
+import { DatabaseModule } from '../../database/database.module';
 import { CardsModule } from '../cards/cards.module';
 import { ColumnsModule } from '../columns/columns.module';
 import { OpenAIModule } from '../openai/openai.module';

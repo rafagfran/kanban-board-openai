@@ -1,10 +1,11 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
-import { HttpClient } from '@angular/common/http';
 import {
   Component,
   ElementRef,
+  EventEmitter,
   HostListener,
   Input,
+  Output,
   ViewChild,
   signal,
 } from '@angular/core';
@@ -13,33 +14,35 @@ import { UiButtonComponent } from '@shared/components/ui/ui-button/ui-button.com
 import { UiDropdownComponent } from '@shared/components/ui/ui-dropdown/ui-dropdown.component';
 import { UiInputComponent } from '@shared/components/ui/ui-input/ui-input.component';
 import { IconPlus } from '@shared/icons/plus.component';
-import { Cards, Columns } from '@type/types';
-import { ColumnCardComponent } from '../card/column-card.component';
+import { Columns } from '@type/types';
+import { CardComponent } from '../card/card.component';
+import { ColumnService } from './column.service';
 
 @Component({
-  selector: 'board-column',
+  selector: 'column',
   imports: [
     UiButtonComponent,
     CdkDrag,
     UiInputComponent,
     IconPlus,
     UiInputComponent,
-    ColumnCardComponent,
+    CardComponent,
     UiDropdownComponent,
   ],
-  templateUrl: './board-column.component.html',
-  styleUrl: './board-column.component.scss',
+  templateUrl: './column.component.html',
+  styleUrl: './column.component.scss',
 })
 
-export class BoardColumnComponent {
+export class ColumnComponent {
   @ViewChild(UiInputComponent) inputNewTask!: UiInputComponent;
   @ViewChild('newTaskContainer') newTaskContainer!: ElementRef<HTMLDivElement>;
   @Input() columnData!: Columns;
+  @Output() deleteColumn = new EventEmitter<string>();
 
   showInput = signal(false);
   newCardTitle = new FormControl('');
 
-  constructor(private http: HttpClient) { }
+  constructor(private columnService: ColumnService) { }
 
   disableInput = () => {
     this.showInput.set(false);
@@ -52,17 +55,17 @@ export class BoardColumnComponent {
 
   addNewCardToColumn = () => {
     if (!this.newCardTitle.value?.trim()) return;
-
-    this.http
-      .post<Cards>('http://localhost:3000/cards', {
-        title: this.newCardTitle.value,
-        columnId: this.columnData.id,
-      })
+    this.columnService.addCard(this.newCardTitle.value, this.columnData.id)
       .subscribe((data) => {
+        if (!this.columnData.cards) this.columnData.cards = [];
         this.columnData.cards.push(data);
-       this.disableInput()
+        this.disableInput()
       });
   };
+
+  handleDeleteColumn() {
+    this.deleteColumn.emit(this.columnData.id);
+  }
 
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {

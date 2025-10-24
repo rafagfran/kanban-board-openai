@@ -1,5 +1,5 @@
-import { PrismaService } from '@/database/prisma.service';
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../../database/prisma.service';
 import type { CreateColumnDto } from './dto/create-column.dto';
 import { UpdateColumnDto } from './dto/update-column.dto';
 

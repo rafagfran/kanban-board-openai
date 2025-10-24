@@ -23,6 +23,7 @@
     "@ai-sdk/deepinfra": "^0.1.16",
     "@ai-sdk/openai": "^1.2.1",
     "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "@prisma/client": "^6.4.1",

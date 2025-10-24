@@ -1,15 +1,14 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { UiButtonComponent } from '@shared/components/ui/ui-button/ui-button.component';
+import { UiInputComponent } from '@shared/components/ui/ui-input/ui-input.component';
 import { IconAutomate } from '@shared/icons/automate.component';
 import { IconClose } from '@shared/icons/close';
 import { IconSend } from '@shared/icons/send.component';
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 import { TimeFormatPipe } from '../../../utils/timeFormat/time-format.pipe';
-import { UiButtonComponent } from '@shared/components/ui/ui-button/ui-button.component';
-import { UiInputComponent } from '@shared/components/ui/ui-input/ui-input.component';
-import { BoardService } from '../board/board.service';
+import { ChatbotService } from './chatbot.service';
 
 
 @Component({
@@ -41,12 +40,9 @@ export class ChatbotComponent {
   ]);
   typingMessage = 'Processing...';
 
-  @Output() actionTaken = new EventEmitter<boolean>();
+  @Output() actionTaken = new EventEmitter();
 
-  constructor(
-    private http: HttpClient,
-    private boardService: BoardService,
-  ) { }
+  constructor(private chatbotService: ChatbotService,) { }
 
   openChatbot() {
     this.isActiveChatbot = true;
@@ -70,19 +66,11 @@ export class ChatbotComponent {
       },
     ]);
 
-    this.http
-      .post<{ toolCalls: boolean; message: string; timestamp: Date }>(
-        'http://localhost:3000/chatbot',
-        {
-          message: this.chatUserInput.value,
-        },
-      )
+    this.chatbotService.sendMessage(this.chatUserInput.value)
       .subscribe((data) => {
         const { message } = data;
-
         const converMessage = marked(message) as string;
         const safeResponse = DOMPurify.sanitize(converMessage);
-
         this.messages.update((prev) => [
           ...prev,
           { role: 'bot', content: safeResponse, timestamp: Date.now() },

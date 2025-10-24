@@ -1,5 +1,5 @@
 import type { Routes } from '@angular/router';
-import { BoardComponent } from './features/kanbam/board/board.component';
+import { BoardComponent } from './features/kanban/board/board.component';
 
 
 export const routes: Routes = [

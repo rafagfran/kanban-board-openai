@@ -2,9 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { CardPriority } from '@prisma/client';
 import { ToolSet, tool } from 'ai';
 import { z } from 'zod';
-import { CardsService } from '../cards/cards.service';
-import { CreateCardDto } from '../cards/dto/create-card.dto';
-import { ColumnsService } from '../columns/columns.service';
+import { CardsService } from '../../cards/cards.service';
+import { CreateCardDto } from '../../cards/dto/create-card.dto';
+import { ColumnsService } from '../../columns/columns.service';
+
 
 @Injectable()
 export class ToolsService {

@@ -52,6 +52,8 @@ Thumbs.db
 # dotenv environment variable files
 .env
 .env.*.local
+environment.*
+!environment.example.ts
 
 # Miscellaneous
 /connect.lock

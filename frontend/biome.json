@@ -16,7 +16,8 @@
        "src/tsconfig.spec.json",
        "src/tsconfig.json",
        "src/tslint.json",
-       ".drawio"
+       ".drawio",
+       "*.d.ts"
      ]
    },
    "vcs": {

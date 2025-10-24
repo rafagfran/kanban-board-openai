@@ -17,7 +17,7 @@ export class OpenAIService {
  */
   private initializeOpenAI() {
     const token = process.env.GITHUB_TOKEN;
-    const endpoint = 'https://models.inference.ai.azure.com';
+    const endpoint = 'https://models.github.ai/inference';
     this.openai = createOpenAI({ baseURL: endpoint, apiKey: token });
     this.model = this.openai('gpt-4o-mini');
   }

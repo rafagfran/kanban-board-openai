@@ -1,20 +1,19 @@
-$color-primary: #7a6ff0; // Roxo levemente mais vibrante para destaque sutil
-$color-primary-text: #edeaff; // Texto claro com um tom levemente aquecido
-$color-muted: rgba(225, 225, 255, 0.2); // Um tom mais equilibrado e suave
-$color-muted-hover: rgba(225, 225, 255, 0.3); // Leve aumento no contraste para hover
-$color-white: #f0efff; // Branco mais suave para menor contraste
-$color-border: #48486a; // Cinza-azulado mais equilibrado para bordas discretas
-$color-text: #e2e2f5; // Texto principal com um tom mais aconchegante
-$color-text-muted: #a0a0b8; // Texto secundário mais harmonioso
-$color-column-background: #29293d; // Fundo das colunas com um toque mais moderno
-$color-card-background: #32324a; // Fundo dos cards mais equilibrado
-$color-background: #1c1c2b; // Fundo geral ligeiramente mais neutro e quente
-$color-board-background: #24243a; // Fundo do quadro mais refinado
-$color-header-background: #282844; // Fundo do cabeçalho com uma transição mais suave
-$color-priority-low: #3b82f6; // Azul mais moderno e agradável para baixa prioridade
-$color-priority-medium: #f59e0b; // Laranja equilibrado para média prioridade
-$color-priority-high: #ef4444; // Vermelho mais sofisticado para alta prioridade
-
+$color-primary: #4f8ef7; // Azul vibrante como cor principal (destaques e botões)
+$color-primary-text: #eaf2ff; // Texto claro com leve toque azulado
+$color-muted: rgba(200, 220, 255, 0.15); // Tons sutis para divisões e estados inativos
+$color-muted-hover: rgba(200, 220, 255, 0.25); // Um pouco mais visível no hover
+$color-white: #e9f0ff; // Branco levemente azulado, reduzindo contraste excessivo
+$color-border: #3a4b6a; // Azul acinzentado para bordas e linhas de separação
+$color-text: #d8e4ff; // Texto principal com bom contraste sobre fundo escuro
+$color-text-muted: #8fa1c7; // Texto secundário, mais suave e frio
+$color-column-background: #1f2638; // Fundo das colunas com profundidade azulada
+$color-card-background: #27304a; // Fundo dos cards levemente destacado das colunas
+$color-background: #151a26; // Fundo geral (quase preto com toque azul)
+$color-board-background: #1a2133; // Fundo do quadro, ligeiramente mais claro
+$color-header-background: #1e2a3f; // Cabeçalho com contraste equilibrado e leitura fácil
+$color-priority-low: #3b82f6; // Azul puro para baixa prioridade
+$color-priority-medium: #eab308; // Amarelo frio, mantém contraste sem destoar
+$color-priority-high: #f87171; // Vermelho suave, mais harmônico no dark blue theme
 
 $spacing-1: 0.25rem;
 $spacing-2: calc($spacing-1 * 2);

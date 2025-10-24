@@ -1,5 +1,5 @@
-import { PrismaService } from '@/database/prisma.service';
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../../database/prisma.service';
 import { CreateCardDto } from './dto/create-card.dto';
 import { UpdateCardDto } from './dto/update-card.dto';
 
@@ -18,7 +18,7 @@ export class CardsService {
       select: { position: true },
       orderBy: { position: 'desc' },
     });
-    const nextPosition = lastCard?.position ?? 0 + 1
+    const nextPosition = (lastCard?.position ?? 0 ) + 1
     return this.prisma.card.create({
       data: { ...createCardDto, position: nextPosition }
     });

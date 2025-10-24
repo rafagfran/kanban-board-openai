@@ -2,9 +2,10 @@
 import { Module } from '@nestjs/common';
 import { CardsModule } from '../cards/cards.module';
 import { ColumnsModule } from '../columns/columns.module';
-import { MessageContextService } from './messageContext.service';
-import { OpenAIService } from './openai.service';
-import { ToolsService } from './toolsService';
+import { MessageContextService } from './services/messageContext.service';
+import { OpenAIService } from './services/openai.service';
+import { ToolsService } from './services/tools.service';
+
 
 
 @Module({

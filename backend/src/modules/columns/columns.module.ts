@@ -1,5 +1,6 @@
-import { DatabaseModule } from '@/database/database.module';
+
 import { Module } from '@nestjs/common';
+import { DatabaseModule } from '../../database/database.module';
 import { ColumnsController } from './columns.controller';
 import { ColumnsService } from './columns.service';
 

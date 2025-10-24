@@ -6,7 +6,6 @@ import {
   moveItemInArray,
   transferArrayItem
 } from '@angular/cdk/drag-drop';
-import { HttpClient } from '@angular/common/http';
 import {
   Component,
   ElementRef,
@@ -15,14 +14,15 @@ import {
   signal,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BoardHeaderComponent } from '@shared/components/layout/header/board-header.component';
+import { BoardHeaderComponent } from '@shared/components/layout/header/header.component';
 import { UiButtonComponent } from '@shared/components/ui/ui-button/ui-button.component';
 import { UiInputComponent } from '@shared/components/ui/ui-input/ui-input.component';
 import { IconPlus } from '@shared/icons/plus.component';
 import { Cards, Columns } from '@type/types';
 import { ChatbotComponent } from '../chatbot/chatbot.component';
-import { BoardColumnComponent } from '../column/board-column.component';
+import { ColumnComponent } from '../column/column.component';
 import { BoardService } from './board.service';
+
 
 
 @Component({
@@ -32,7 +32,7 @@ import { BoardService } from './board.service';
     CdkDrag,
     CdkDropList,
     CdkDropListGroup,
-    BoardColumnComponent,
+    ColumnComponent,
     UiInputComponent,
     UiButtonComponent,
     IconPlus,
@@ -50,19 +50,17 @@ export class BoardComponent {
   showInput = signal(false);
   newColumnTitle = new FormControl('');
 
-  constructor(private boardService: BoardService, private http: HttpClient) { }
-
-  getBoardData() {
-    this.boardService.fetchColumnsWithCards().subscribe({
-      next: (data) => {
-        this.columns.set(data);
-      },
-      error: (error) => console.log(error),
-    });
-  }
+  constructor(private boardService: BoardService) { }
 
   ngOnInit() {
-    this.getBoardData();
+    this.getBoardData()
+  }
+
+  getBoardData() {
+    this.boardService.getColsWithCards().subscribe({
+      next: (data) => { this.columns.set(data) },
+      error: (error) => console.log(error),
+    });
   }
 
   enableInput = () => {
@@ -80,6 +78,16 @@ export class BoardComponent {
     }
   }
 
+  deleteColumn(columnId: string) {
+    this.boardService.delete(columnId).subscribe({
+      next: () => {
+        this.columns.update(cols => cols.filter(c => c.id !== columnId));
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  // Drag and Drop
   dropColumn(event: CdkDragDrop<Columns[]>) {
     moveItemInArray(this.columns(), event.previousIndex, event.currentIndex);
   }

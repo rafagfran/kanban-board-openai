@@ -1,12 +1,12 @@
 <div class="column">
   <header class="column__header">
     <span class="title">{{columnData.title}}</span>
-    <ui-dropdown />
+    <ui-dropdown [columnId]="columnData.id" (deleteColumn)="handleDeleteColumn()" />
   </header>
 
   <div class="column__cards" cdkDropList>
     @for(card of columnData.cards; track card.id){
-    <column-card cdkDrag [cardData]="card" />
+    <card cdkDrag [cardData]="card" />
     }
 
     @if(showInput()){
