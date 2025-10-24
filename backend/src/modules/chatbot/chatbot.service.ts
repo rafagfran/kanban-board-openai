@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMessageDto } from './dto/create-message.dto';
-import { MessageContextService } from './openai/messageContext.service';
-import { OpenAIService } from './openai/openai.service';
-import { ToolsService } from './openai/toolsService';
+import { MessageContextService } from '../openai/messageContext.service';
+import { OpenAIService } from '../openai/openai.service';
+import { ToolsService } from '../openai/toolsService';
 
 
 @Injectable()

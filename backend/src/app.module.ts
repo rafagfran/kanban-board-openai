@@ -2,14 +2,13 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
-import { CardModule } from './modules/card/card.module';
-
 import { AllExceptionsFilter } from './common/filters/allExceptionsFilter';
+import { CardsModule } from './modules/cards/cards.module';
 import { ChatbotModule } from './modules/chatbot/chatbot.module';
-import { ColumnModule } from './modules/column/column.module';
+import { ColumnsModule } from './modules/columns/columns.module';
 
 @Module({
-  imports: [CardModule, DatabaseModule, ColumnModule, ChatbotModule],
+  imports: [CardsModule, DatabaseModule, ColumnsModule, ChatbotModule],
   controllers: [AppController],
   providers: [AppService, AllExceptionsFilter]
 })

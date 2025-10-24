@@ -1,12 +1,13 @@
 import { DatabaseModule } from '@/database/database.module';
-import { CardModule } from '@/modules/card/card.module';
-import { ColumnModule } from '@/modules/column/column.module';
 import { Module } from '@nestjs/common';
+import { CardsModule } from '../cards/cards.module';
+import { ColumnsModule } from '../columns/columns.module';
+import { OpenAIModule } from '../openai/openai.module';
 import { ChatbotController } from './chatbot.controller';
 import { ChatbotService } from './chatbot.service';
 
 @Module({
-  imports: [CardModule, ColumnModule, DatabaseModule],
+  imports: [CardsModule, ColumnsModule, DatabaseModule, OpenAIModule],
   controllers: [ChatbotController],
   providers: [ChatbotService]
 })

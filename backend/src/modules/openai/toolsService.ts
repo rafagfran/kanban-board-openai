@@ -1,18 +1,18 @@
-import { CardService } from '@/modules/card/card.service';
-import { CreateCardDto } from '@/modules/card/dto/create-card.dto';
-import { ColumnService } from '@/modules/column/column.service';
 import { Injectable } from '@nestjs/common';
 import { CardPriority } from '@prisma/client';
 import { ToolSet, tool } from 'ai';
 import { z } from 'zod';
+import { CardsService } from '../cards/cards.service';
+import { CreateCardDto } from '../cards/dto/create-card.dto';
+import { ColumnsService } from '../columns/columns.service';
 
 @Injectable()
 export class ToolsService {
   tools: ToolSet;
 
   constructor(
-    private cardService: CardService,
-    private columnService: ColumnService
+    private cardsService: CardsService,
+    private columnsService: ColumnsService
   ) {
     this.initializeTools();
   }
@@ -26,19 +26,19 @@ export class ToolsService {
       getInfos: tool({
         description: 'Get columns and cards informations',
         parameters: z.object({}),
-        execute: async () => await this.columnService.listWithCards(),
+        execute: async () => await this.columnsService.listWithCards(),
       }),
       createCol: tool({
         description: 'Create a single new column',
         parameters: z.object({ title: z.string().describe('Column title') }),
-        execute: async ({ title }) => await this.columnService.create({ title }),
+        execute: async ({ title }) => await this.columnsService.create({ title }),
       }),
       createMultipleCols: tool({
         description: 'Create multiple columns',
         parameters: z.object({
           columns: z.array(z.object({ title: z.string().describe('Column title') })),
         }),
-        execute: async ({ columns }) => await this.columnService.createMany(columns),
+        execute: async ({ columns }) => await this.columnsService.createMany(columns),
       }),
       createCard: tool({
         description: 'Create a single new card',
@@ -48,7 +48,7 @@ export class ToolsService {
           columnId: z.number().describe('Column ID')
         }),
         execute: async ({ columnId, priority, title }) => {
-          await this.cardService.create({ columnId, title, priority });
+          await this.cardsService.create({ columnId, title, priority });
         },
       }),
       createMultipleCards: tool({
@@ -64,13 +64,13 @@ export class ToolsService {
         }),
         execute: async ({ cards }: { cards: CreateCardDto[] }) => {
           if (!Array.isArray(cards)) return 'Cards are not in correct format.';
-          return await this.cardService.createMany(cards);
+          return await this.cardsService.createMany(cards);
         },
       }),
       deleteAllColumns: tool({
         description: 'Delete all columns',
         parameters: z.object({}),
-        execute: async () => await this.columnService.deleteAll(),
+        execute: async () => await this.columnsService.deleteAll(),
       }),
     };
   }

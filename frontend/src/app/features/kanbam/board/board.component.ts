@@ -15,11 +15,11 @@ import {
   signal,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { BoardHeaderComponent } from '@shared/components/layout/header/board-header.component';
+import { UiButtonComponent } from '@shared/components/ui/ui-button/ui-button.component';
+import { UiInputComponent } from '@shared/components/ui/ui-input/ui-input.component';
 import { IconPlus } from '@shared/icons/plus.component';
 import { Cards, Columns } from '@type/types';
-import { BoardHeaderComponent } from '../../layout/header/board-header.component';
-import { UiButtonComponent } from '../../ui/ui-button/ui-button.component';
-import { UiInputComponent } from '../../ui/ui-input/ui-input.component';
 import { ChatbotComponent } from '../chatbot/chatbot.component';
 import { BoardColumnComponent } from '../column/board-column.component';
 import { BoardService } from './board.service';
@@ -71,10 +71,7 @@ export class BoardComponent {
 
   addNewColumn() {
     if (this.newColumnTitle.value) {
-      this.http
-        .post<Columns>('http://localhost:3000/column', {
-          title: this.newColumnTitle.value,
-        })
+      this.boardService.createColumn(this.newColumnTitle.value)
         .subscribe((newColumn) => {
           this.columns.update(cols => [...cols, newColumn]);
           this.newColumnTitle.setValue('');

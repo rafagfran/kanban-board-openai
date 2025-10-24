@@ -13,7 +13,7 @@
     <div #newTaskContainer class="column__add-card-container">
       <ui-input [focusOnInit]="true" [control]="newCardTitle" variant="large" placeholder="Insira um título" />
       <div class="column__add-card-form">
-        <ui-button (onClick)="addNewCardToColumn({ columnId: columnData.id })">
+        <ui-button (onClick)="addNewCardToColumn()">
           <span>Add Card</span>
         </ui-button>
 

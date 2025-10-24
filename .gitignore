@@ -21,8 +21,6 @@ yarn-error.log*
 **/coverage
 /.nyc_output
 
-# Database
-dev.db
 
 # Runtime data
 pids

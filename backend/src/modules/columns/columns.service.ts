@@ -4,7 +4,7 @@ import type { CreateColumnDto } from './dto/create-column.dto';
 import { UpdateColumnDto } from './dto/update-column.dto';
 
 @Injectable()
-export class ColumnService {
+export class ColumnsService {
   constructor(private prisma: PrismaService) { }
 
   /**

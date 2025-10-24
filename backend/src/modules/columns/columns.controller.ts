@@ -8,32 +8,32 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ColumnService } from './column.service';
+import { ColumnsService } from './columns.service';
 import { CreateColumnDto } from './dto/create-column.dto';
 import { UpdateColumnDto } from './dto/update-column.dto';
 
 @Controller('columns')
-export class ColumnController {
-  constructor(private readonly columnService: ColumnService) { }
+export class ColumnsController {
+  constructor(private readonly columnsService: ColumnsService) { }
 
   @Post()
   create(@Body() createColumnDto: CreateColumnDto) {
-    return this.columnService.create(createColumnDto);
+    return this.columnsService.create(createColumnDto);
   }
 
   @Get('with-cards')
   listWithCards() {
-    return this.columnService.listWithCards();
+    return this.columnsService.listWithCards();
   }
 
   @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
-    return this.columnService.delete(id);
+    return this.columnsService.delete(id);
   }
 
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number,
     @Body() updateColumnDto: UpdateColumnDto) {
-    return this.columnService.update(id, updateColumnDto)
+    return this.columnsService.update(id, updateColumnDto)
   }
 }

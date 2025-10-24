@@ -9,13 +9,12 @@ import {
   signal,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { UiButtonComponent } from '@shared/components/ui/ui-button/ui-button.component';
+import { UiDropdownComponent } from '@shared/components/ui/ui-dropdown/ui-dropdown.component';
+import { UiInputComponent } from '@shared/components/ui/ui-input/ui-input.component';
 import { IconPlus } from '@shared/icons/plus.component';
 import { Cards, Columns } from '@type/types';
-import { UiButtonComponent } from '../../ui/ui-button/ui-button.component';
-import { UiDropdownComponent } from '../../ui/ui-dropdown/ui-dropdown.component';
-import { UiInputComponent } from '../../ui/ui-input/ui-input.component';
 import { ColumnCardComponent } from '../card/column-card.component';
-
 
 @Component({
   selector: 'board-column',
@@ -33,7 +32,7 @@ import { ColumnCardComponent } from '../card/column-card.component';
 })
 
 export class BoardColumnComponent {
-   @ViewChild(UiInputComponent) inputNewTask!: UiInputComponent;
+  @ViewChild(UiInputComponent) inputNewTask!: UiInputComponent;
   @ViewChild('newTaskContainer') newTaskContainer!: ElementRef<HTMLDivElement>;
   @Input() columnData!: Columns;
 
@@ -51,16 +50,17 @@ export class BoardColumnComponent {
     this.showInput.set(true);
   };
 
-  addNewCardToColumn = ({ columnId }: { columnId: string }) => {
+  addNewCardToColumn = () => {
+    if (!this.newCardTitle.value?.trim()) return;
+
     this.http
       .post<Cards>('http://localhost:3000/cards', {
         title: this.newCardTitle.value,
-        columnId,
+        columnId: this.columnData.id,
       })
       .subscribe((data) => {
         this.columnData.cards.push(data);
-        this.newCardTitle.setValue('');
-        this.showInput.set(false);
+       this.disableInput()
       });
   };
 

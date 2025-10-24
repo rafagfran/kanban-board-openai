@@ -7,8 +7,8 @@ import { IconSend } from '@shared/icons/send.component';
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 import { TimeFormatPipe } from '../../../utils/timeFormat/time-format.pipe';
-import { UiButtonComponent } from '../../ui/ui-button/ui-button.component';
-import { UiInputComponent } from '../../ui/ui-input/ui-input.component';
+import { UiButtonComponent } from '@shared/components/ui/ui-button/ui-button.component';
+import { UiInputComponent } from '@shared/components/ui/ui-input/ui-input.component';
 import { BoardService } from '../board/board.service';
 
 

@@ -19,7 +19,7 @@
           "options": {
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/scss"
+                "src/styles"
               ]
             },
             "outputPath": "dist/kanban-angular-nest",
