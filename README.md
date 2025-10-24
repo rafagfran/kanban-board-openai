@@ -1,14 +1,16 @@
 # Kanban Board Project
 
-Projeto de Kanban board com backend em **NestJS** e frontend em **Angular**. Permite criar, atualizar e deletar cards e columns. Conta também com um chatbot integrado a openAi possibilitando automatizaçôes
+Projeto de Kanban Board com backend em **NestJS** e frontend em **Angular**. Permite criar, atualizar e deletar **cards** e **columns**, além de contar com um **chatbot integrado ao OpenAI**, possibilitando automações.
 
 ## Link de acesso web
-![Acesse o projeto](https://asdjadlas.com)
+
+[Clique aqui para acessar o projeto](https://kanban-val-client.netlify.app/)
 
 ## 🚀 Como rodar localmente
 
 ### Backend
-```bash
+
+```
 cd backend
 npm install
 npx prisma generate
@@ -16,13 +18,15 @@ npm run start:dev
 ```
 
 Executar testes unitários:
-```bash
-cd backend
-npm run test
 
 ```
+cd backend
+npm run test
+```
+
 ### Frontend
-```bash
+
+```
 cd frontend
 npm install
 ng serve
@@ -30,53 +34,71 @@ ng serve
 
 ## 📂 Estrutura do Projeto
 
-backend/ # NestJS
+```
+backend/   # NestJS
   src/
     modules/
     common/
     database/
 
-frontend/ # Angular
+frontend/  # Angular
   src/
     app/
+      features/
+      shared/
+      types
+      utils
     components/
     pages/
+```
 
-    ## 🛠 Tecnologias
+## 🛠 Tecnologias
 
-- **Backend:** NestJS, Prisma, SQLite, Jest, OpenAi
-- **Frontend:** Angular, TypeScript, SCSS
+* **Backend:** NestJS, Prisma, SQLite, Jest, OpenAI API, AI SDK
+* **Frontend:** Angular, TypeScript, SCSS, Angular CDK (drag-and-drop)
 
 ## ⚡ Funcionalidades
 
----
+* Criar, atualizar e deletar **cards**
+* Criar, atualizar e deletar **columns**
+* Automações via **chatbot**
+* Testes unitários com **Jest**
 
-- Criar, atualizar e deletar **cards**  
-- Criar, atualizar e deletar **columns**  
-- Automações via chatbot
-- Testes unitários com Jest  
+## 📦 Endpoints Principais
 
----
+| Método | Endpoint            | Descrição                    |
+| ------ | ------------------- | ---------------------------- |
+| POST   | /cards              | Cria um card                 |
+| PATCH  | /cards/:id          | Atualiza um card             |
+| DELETE | /cards/:id          | Deleta um card               |
+| POST   | /columns            | Cria uma coluna              |
+| GET    | /columns/with-cards | Busca colunas com seus cards |
+| PATCH  | /columns/:id        | Atualiza uma coluna          |
+| DELETE | /columns/:id        | Deleta uma coluna            |
 
-📦 Endpoints Principais
-| Método | Endpoint     | Descrição       |
-| ------ | ------------ | --------------- |
-| POST   | /cards       | Cria um card    |
-| PATCH  | /cards/:id   | Atualiza card   |
-| DELETE | /cards/:id   | Deleta card     |
-| POST   | /columns     | Cria coluna     |
-| PATCH  | /columns/:id | Atualiza coluna |
-| DELETE | /columns/:id | Deleta coluna   |
+## 💬 Como utilizar o chatbot
 
+O **chatbot** foi criado para realizar automações. Você pode solicitar tarefas como:
+
+* Criar um fluxo completo de gestão de projeto
+* Deletar todas as colunas
+* Outras automações relacionadas a cards e columns
+
+Ele executará as ações automaticamente.
 
 ## 🔧 Configurações
 
 ### Backend
-- Crie um arquivo .env com variáveis API keys conforme o .env.example
-- prisma/schema.prisma define o modelo do banco
 
-### Frontend
-- Crie um arquivo .env com a variavel de url do backend local conforme o .env.example
+1. Crie um arquivo `.env` com as variáveis de API conforme o `.env.example`
+2. O modelo de banco de dados está definido em `prisma/schema.prisma`
+3. Para usar a OpenAI API via GitHub:
 
-Para dúvidas entrar em contato via linkedin
-https://www.linkedin.com/in/rafagfran/
+   * Acesse: [Azure OpenAI GPT-4o-mini](https://github.com/marketplace/models/azure-openai/gpt-4o-mini)
+   * Clique em "Usar este modelo"
+   * Crie seu token de acesso
+
+## 📫 Contato
+
+Para dúvidas ou feedback, entre em contato via LinkedIn:
+[https://www.linkedin.com/in/rafagfran/](https://www.linkedin.com/in/rafagfran/)
