@@ -1,0 +1,67 @@
+$color-primary: #7a6ff0; // Roxo levemente mais vibrante para destaque sutil
+$color-primary-text: #edeaff; // Texto claro com um tom levemente aquecido
+$color-muted: rgba(225, 225, 255, 0.2); // Um tom mais equilibrado e suave
+$color-muted-hover: rgba(225, 225, 255, 0.3); // Leve aumento no contraste para hover
+$color-white: #f0efff; // Branco mais suave para menor contraste
+$color-border: #48486a; // Cinza-azulado mais equilibrado para bordas discretas
+$color-text: #e2e2f5; // Texto principal com um tom mais aconchegante
+$color-text-muted: #a0a0b8; // Texto secundário mais harmonioso
+$color-column-background: #29293d; // Fundo das colunas com um toque mais moderno
+$color-card-background: #32324a; // Fundo dos cards mais equilibrado
+$color-background: #1c1c2b; // Fundo geral ligeiramente mais neutro e quente
+$color-board-background: #24243a; // Fundo do quadro mais refinado
+$color-header-background: #282844; // Fundo do cabeçalho com uma transição mais suave
+$color-priority-low: #3b82f6; // Azul mais moderno e agradável para baixa prioridade
+$color-priority-medium: #f59e0b; // Laranja equilibrado para média prioridade
+$color-priority-high: #ef4444; // Vermelho mais sofisticado para alta prioridade
+
+
+$spacing-1: 0.25rem;
+$spacing-2: calc($spacing-1 * 2);
+$spacing-3: calc($spacing-1 * 3);
+$spacing-4: calc($spacing-1 * 4);
+$spacing-5: calc($spacing-1 * 5);
+$spacing-6: calc($spacing-1 * 6);
+$spacing-7: calc($spacing-1 * 7);
+$spacing-8: calc($spacing-1 * 8);
+$spacing-9: calc($spacing-1 * 9);
+$spacing-10: calc($spacing-1 * 10);
+$spacing-12: calc($spacing-1 * 12);
+$spacing-16: calc($spacing-1 * 16);
+
+$spacing-between-columns: $spacing-2;
+$spacing-between-cards: $spacing-2;
+
+$size-header: 3rem;
+$size-board: calc(100vh - $size-header);
+$size-column: 300px;
+
+$rounded-sm: 0.25rem;
+$rounded-md: 0.375rem;
+$rounded-lg: 0.5rem;
+$rounded-xl: 0.75rem;
+
+$rounded-card: $rounded-lg;
+$rounded-column: $rounded-xl;
+
+$text-xs: 0.75rem;
+$text-sm: 0.875rem;
+$text-base: 1rem;
+
+$font-light: 300;
+$font-normal: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+
+$input-border: 1px solid $color-border;
+
+$default-transition-duration: 150ms;
+
+$breakpoints: (
+  "sm": 640px,
+  "md": 768px,
+  "lg": 1024px,
+  "xl": 1280px,
+  "2xl": 1400px,
+);
