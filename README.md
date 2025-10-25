@@ -10,6 +10,10 @@ Projeto de Kanban Board com backend em **NestJS** e frontend em **Angular**. Per
 
 ### Backend
 
+
+
+
+
 ```
 cd backend
 npm install
@@ -34,7 +38,10 @@ ng serve
 
 ## 🎥 Demonstração do Kanban Board
 Clique para assistir ao vídeo:
-[Assista ao vídeo de demonstração](https://www.youtube.com/watch?v=5OZRuUIqJcw)
+
+
+
+https://github.com/user-attachments/assets/d631b02c-6ae9-45c9-a5a5-c95277bb9af8
 
 
 ## 📂 Estrutura do Projeto
