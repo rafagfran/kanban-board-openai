@@ -44,6 +44,10 @@ Clique para assistir ao vídeo:
 https://github.com/user-attachments/assets/d631b02c-6ae9-45c9-a5a5-c95277bb9af8
 
 
+
+**prompt utilizado na desmontração**:
+"Create a complete project management workflow, including all typical stages of planning, execution, monitoring, and delivery. For each stage, include demonstrative cards with realistic examples of tasks, assignees, deadlines, and status. At the end, generate detailed documentation of the workflow, explaining the logic, the stages, task prioritization, and how the cards relate to each other within the process."
+
 ## 📂 Estrutura do Projeto
 
 ```
