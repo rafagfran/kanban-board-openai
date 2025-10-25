@@ -6,7 +6,7 @@
     @include border(bottom);
 
     background-color: $color-header-background;
-    height: $size-header;
+    padding: $spacing-2;
     display: grid;
     place-items: center;
     width: 100%;
@@ -15,20 +15,20 @@
   .header__container {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 10px;
     align-items: center;
     justify-content: center;
     font-size: $text-sm;
     @include container;
   }
 
-  .header__date {
-    display: none;
+  // .header__date {
+  //   display: none;
 
-    @include respond-to("md") {
-      display: block;
-    }
-  }
+  //   @include respond-to("md") {
+  //     display: block;
+  //   }
+  // }
 
   .header__actions {
     display: flex;
@@ -45,5 +45,6 @@
 
   .header__explain {
     color: #c4c71e;
+    text-align: center;
   }
 }

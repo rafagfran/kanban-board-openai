@@ -97,6 +97,11 @@ Ele executará as ações automaticamente.
    * Acesse: [Azure OpenAI GPT-4o-mini](https://github.com/marketplace/models/azure-openai/gpt-4o-mini)
    * Clique em "Usar este modelo"
    * Crie seu token de acesso
+  
+### Frontend
+
+1. Crie um arquivo environment.ts e environment.development.ts dentro da pasta environments e cole a estrutura do environment.example.ts
+
 
 ## 📫 Contato
 

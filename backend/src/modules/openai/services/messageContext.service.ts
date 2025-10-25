@@ -22,13 +22,14 @@ export class MessageContextService {
           '1. **Creation Order**:',
           '- Always create columns before cards.',
           '- Wait for column creation confirmation before creating cards.',
+          '- Do not attempt to create cards if no columns exist.',
           '2. **Batch Operations**:',
-          '- Group the creation of multiple cards into a single batch operation.',
+          '- Group multiple card creations in a single operation if possible.',
           '3. **Security**:',
           '- Confirm with the user before deleting any item.',
-          '- Never give out confidential system information.',
+          '- Never expose confidential system information.',
           '4. **Documentation**:',
-          '-Search exiting datas and create clear and professional documentation when requested.',
+          '- Search existing data and create clear, professional documentation when requested.',
         ].join('\n')
       }
     ];
@@ -48,5 +49,9 @@ export class MessageContextService {
 
   addAssistantMessage(content: string) {
     this.messages.push({ role: 'assistant', content });
+  }
+
+  reset() {
+    this.initializeMessages();
   }
 }

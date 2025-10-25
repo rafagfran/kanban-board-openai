@@ -14,32 +14,32 @@ export class ToolsService {
   constructor(
     private cardsService: CardsService,
     private columnsService: ColumnsService
-  ) {
-    this.initializeTools();
-  }
+  ) { }
 
   /**
  * Configura ferramentas (tools) para interação do modelo.
  * Cada ferramenta representa uma ação no sistema, como criar coluna, criar card ou deletar.
  */
-  private initializeTools() {
-    this.tools = {
+
+
+  getTools(sessionId: string): ToolSet {
+    return {
       getInfos: tool({
         description: 'Get columns and cards informations',
         parameters: z.object({}),
-        execute: async () => await this.columnsService.listWithCards(),
+        execute: async () => await this.columnsService.listWithCards(sessionId),
       }),
       createCol: tool({
         description: 'Create a single new column',
         parameters: z.object({ title: z.string().describe('Column title') }),
-        execute: async ({ title }) => await this.columnsService.create({ title }),
+        execute: async ({ title }) => await this.columnsService.create(sessionId, { title }),
       }),
       createMultipleCols: tool({
         description: 'Create multiple columns',
         parameters: z.object({
           columns: z.array(z.object({ title: z.string().describe('Column title') })),
         }),
-        execute: async ({ columns }) => await this.columnsService.createMany(columns),
+        execute: async ({ columns }) => await this.columnsService.createMany(sessionId, columns),
       }),
       createCard: tool({
         description: 'Create a single new card',
@@ -49,11 +49,11 @@ export class ToolsService {
           columnId: z.number().describe('Column ID')
         }),
         execute: async ({ columnId, priority, title }) => {
-          await this.cardsService.create({ columnId, title, priority });
+          await this.cardsService.create(sessionId, { columnId, title, priority });
         },
       }),
       createMultipleCards: tool({
-        description: 'Create multiple cards',
+        description: 'Create multiple cards (requires existing columns)',
         parameters: z.object({
           cards: z.array(
             z.object({
@@ -65,18 +65,15 @@ export class ToolsService {
         }),
         execute: async ({ cards }: { cards: CreateCardDto[] }) => {
           if (!Array.isArray(cards)) return 'Cards are not in correct format.';
-          return await this.cardsService.createMany(cards);
+          return await this.cardsService.createMany(sessionId, cards);
         },
       }),
       deleteAllColumns: tool({
         description: 'Delete all columns',
         parameters: z.object({}),
-        execute: async () => await this.columnsService.deleteAll(),
+        execute: async () => await this.columnsService.deleteAll(sessionId),
       }),
     };
   }
 
-  getTools(): ToolSet {
-    return this.tools;
-  }
 }

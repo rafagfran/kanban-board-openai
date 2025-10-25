@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
-  Post
+  Post,
+  Req
 } from '@nestjs/common';
+import { Request } from 'express';
 import { ChatbotService } from './chatbot.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 
@@ -11,7 +13,8 @@ export class ChatbotController {
   constructor(private chatbotService: ChatbotService) { }
 
   @Post()
-  chatbot(@Body() createMessageDto: CreateMessageDto) {
-    return this.chatbotService.handleMessage(createMessageDto);
+  chatbot(@Req() req: Request, @Body() createMessageDto: CreateMessageDto) {
+    const sessionId = req["sessionId"]
+    return this.chatbotService.handleMessage(sessionId,createMessageDto);
   }
 }

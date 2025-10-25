@@ -13,14 +13,14 @@ export class CardsService {
    * @param createCardDto Dados do card a ser criado.
    * @returns O card recém-criado, incluindo sua posição.
    */
-  async create(createCardDto: CreateCardDto) {
+  async create(sessionId: string, createCardDto: CreateCardDto) {
     const lastCard = await this.prisma.card.findFirst({
       select: { position: true },
       orderBy: { position: 'desc' },
     });
-    const nextPosition = (lastCard?.position ?? 0 ) + 1
+    const nextPosition = (lastCard?.position ?? 0) + 1
     return this.prisma.card.create({
-      data: { ...createCardDto, position: nextPosition }
+      data: { ...createCardDto, position: nextPosition, sessionId}
     });
   }
 
@@ -30,7 +30,8 @@ export class CardsService {
  * @param cards Array de cards a serem criados.
  * @returns Array dos cards criados com suas posições.
  */
-  async createMany(cards: CreateCardDto[]) {
+  async createMany(sessionId: string, cards: CreateCardDto[]) {
+    
     const lastCard = await this.prisma.card.findFirst({
       select: { position: true },
       orderBy: { position: 'desc' },
@@ -38,6 +39,7 @@ export class CardsService {
     const nextPosition = lastCard?.position ?? 0
     const newCards = cards.map((card, i) => ({
       ...card,
+      sessionId,
       position: nextPosition + i + 1
     }));
     await this.prisma.card.createMany({ data: newCards });

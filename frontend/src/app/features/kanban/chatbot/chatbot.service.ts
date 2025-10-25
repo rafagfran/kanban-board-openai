@@ -15,6 +15,9 @@ export class ChatbotService {
       {
         message: message,
       },
+      {
+        withCredentials: true
+      }
     )
   }
 

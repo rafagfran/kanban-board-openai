@@ -68,7 +68,7 @@ export class ChatbotComponent {
 
     this.chatbotService.sendMessage(this.chatUserInput.value)
       .subscribe((data) => {
-        const { message } = data;
+        const { message,toolCalls } = data;
         const converMessage = marked(message) as string;
         const safeResponse = DOMPurify.sanitize(converMessage);
         this.messages.update((prev) => [
@@ -76,7 +76,7 @@ export class ChatbotComponent {
           { role: 'bot', content: safeResponse, timestamp: Date.now() },
         ]);
 
-        if (data.toolCalls) {
+        if (toolCalls) {
           this.actionTaken.emit();
         }
 

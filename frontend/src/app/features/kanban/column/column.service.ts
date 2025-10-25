@@ -15,6 +15,8 @@ export class ColumnService {
       .post<Cards>(`${this.baseUrl}/cards`, {
         title: cardTitle,
         columnId: columnId,
+      }, {
+        withCredentials: true
       })
   }
 

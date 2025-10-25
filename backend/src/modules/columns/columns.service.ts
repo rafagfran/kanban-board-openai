@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../../database/prisma.service';
 import type { CreateColumnDto } from './dto/create-column.dto';
 import { UpdateColumnDto } from './dto/update-column.dto';
@@ -13,14 +14,14 @@ export class ColumnsService {
   * @param createColumnDto Dados da coluna a ser criada.
   * @returns A coluna criada com sua posição.
   */
-  async create(createColumnDto: CreateColumnDto) {
+  async create(sessionId: string, createColumnDto: CreateColumnDto) {
     const lastColumn = await this.prisma.column.findFirst({
       select: { position: true },
       orderBy: { position: 'desc' },
     });
     const nextPosition = (lastColumn?.position ?? 0) + 1;
     return this.prisma.column.create({
-      data: { ...createColumnDto, position: nextPosition },
+      data: { ...createColumnDto, position: nextPosition, sessionId, },
     });
   }
 
@@ -30,19 +31,32 @@ export class ColumnsService {
   * @param columnsData Array de dados das colunas.
   * @returns Array das colunas criadas com posições definidas.
   */
-  async createMany(columnsData: CreateColumnDto[]) {
+  async createMany(sessionId: string, columnsData: CreateColumnDto[]) {
     const lastColumn = await this.prisma.column.findFirst({
       select: { position: true },
       orderBy: { position: 'desc' },
     });
+
     const nextPosition = lastColumn?.position ?? 0;
-    const newColumns = columnsData.map((column, i) => {
+
+    const colsWithPosition: Prisma.ColumnCreateInput[] = columnsData.map((columns, i) => {
       return {
-        ...column,
-        position: nextPosition + i + 1
+        ...columns,
+        sessionId,
+        position: (nextPosition + i) + 1
       };
     });
-    await this.prisma.column.createMany({ data: newColumns })
+
+    await this.prisma.column.createMany({ data: colsWithPosition })
+
+    const newColumns = await this.prisma.column.findMany({
+      where: {
+        sessionId,
+        position: { in: colsWithPosition.map(col => col.position )},
+      },
+      orderBy: { position: 'asc' },
+    });
+
     return newColumns;
   }
 
@@ -51,8 +65,9 @@ export class ColumnsService {
  * Os cards são ordenados pela posição ascendente.
  * @returns Array de colunas com seus cards.
  */
-  async listWithCards() {
+  async listWithCards(sessionId: string) {
     return await this.prisma.column.findMany({
+      where: { sessionId },
       include: { cards: { orderBy: { position: 'asc' } } }
     });
   }
@@ -84,8 +99,8 @@ export class ColumnsService {
    * Deleta todas as colunas.
    * @returns Resultado da operação ou mensagem caso não existam colunas.
    */
-  async deleteAll() {
-    const result = await this.prisma.column.deleteMany({});
+  async deleteAll(sessionId: string) {
+    const result = await this.prisma.column.deleteMany({ where: { sessionId } });
     if (result.count === 0) return 'There are no columns to delete';
     return result
   }
