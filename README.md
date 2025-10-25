@@ -32,6 +32,11 @@ npm install
 ng serve
 ```
 
+## 🎥 Demonstração do Kanban Board
+Clique para assistir ao vídeo:
+[Assista ao vídeo de demonstração](https://www.youtube.com/watch?v=5OZRuUIqJcw)
+
+
 ## 📂 Estrutura do Projeto
 
 ```
