@@ -1,6 +1,6 @@
 # Kanban Board Project
 
-Projeto de Kanban Board com backend em **NestJS** e frontend em **Angular**. Permite criar, atualizar e deletar **cards** e **columns**, além de contar com um **chatbot integrado ao OpenAI**, possibilitando automações.
+Projeto de Kanban Board com backend em **NestJS** e frontend em **Angular**. Permite criar, atualizar e deletar **cards** e **columns**, além de contar com um **chatbot integrado ao OpenAI**, quenutiliza tools as para realizar automações.
 
 ## Link de acesso web
 
